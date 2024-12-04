@@ -98,7 +98,7 @@
 				// model
 
 				const loader = new GLTFLoader();
-				loader.load( 'cat.glb', function ( gltf ) {
+				loader.load( 'RobotExpressive.glb', function ( gltf ) {
 
 					model = gltf.scene;
 					scene.add( model );
@@ -127,9 +127,7 @@
 
 			function createGUI( model, animations ) {
 
-				console.log(animations.length);
-
-				const states = [ 'Idle', 'Walking', '3', '4' ];
+				const states = [ 'Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing' ];
 				const emotes = [ 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp' ];
 
 				gui = new GUI();
@@ -144,7 +142,7 @@
 					const action = mixer.clipAction( clip );
 					actions[ clip.name ] = action;
 
-					 if ( emotes.indexOf( clip.name ) >= 0 || states.indexOf( clip.name ) >= 4 ) {
+					if ( emotes.indexOf( clip.name ) >= 0 || states.indexOf( clip.name ) >= 4 ) {
 
 						action.clampWhenFinished = true;
 						action.loop = THREE.LoopOnce;
@@ -201,7 +199,7 @@
 
 				emoteFolder.open();
 
-				/* // expressions
+				// expressions
 
 				face = model.getObjectByName( 'Head_4' );
 
@@ -212,12 +210,12 @@
 
 					expressionFolder.add( face.morphTargetInfluences, i, 0, 1, 0.01 ).name( expressions[ i ] );
 
-				} */
+				}
 
 				activeAction = actions[ 'Walking' ];
 				activeAction.play();
 
-				// expressionFolder.open();
+				expressionFolder.open();
 
 			}
 
